@@ -36,6 +36,12 @@ export default function App() {
 
       {/* AI Floating Bar */}
       <div className={`ai-bar${chatOpen ? ' hidden' : ''}`} onClick={() => setChatOpen(true)}>
+        <div className="ai-bar-preview">
+          <div className="ai-bar-preview-avatar">S</div>
+          <div className="ai-bar-preview-msg">
+            Hey! I'm your STRIDE stylist. I can identify products from a photo, find your perfect fit, or put together a look. What can I help with?
+          </div>
+        </div>
         <div className="ai-bar-inner">
           <div className="ai-bar-left">
             <div className="ai-bar-avatar">S</div>
