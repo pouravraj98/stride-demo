@@ -202,7 +202,7 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
       return;
     }
 
-    const specialMarkers = ['__SCAN__', '__PRODUCT_0__', '__PRODUCTS_1_2__', '__ORDER__', '__HOME_ADDRESS__', '__OFFICE_ADDRESS__', '__PAYMENT__', '__PROCESSING__', '__CONFIRMED__'];
+    const specialMarkers = ['__SCAN__', '__PRODUCT_0__', '__PRODUCT_DETAIL_1__', '__PRODUCTS_1_2__', '__ORDER__', '__HOME_ADDRESS__', '__OFFICE_ADDRESS__', '__PAYMENT__', '__PROCESSING__', '__CONFIRMED__'];
 
     for (let i = 0; i < step.ai.length; i++) {
       const msg = step.ai[i];
@@ -212,17 +212,17 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         addMessage({ type: 'scan' });
         await wait(2500);
         setMessages((prev) => prev.filter((m) => m.type !== 'scan'));
-      } else if (msg.startsWith('__PRODUCT_') && !msg.includes('PRODUCTS')) {
-        const idx = parseInt(msg.replace('__PRODUCT_', '').replace('__', ''));
-        addMessage({ type: 'productCard', product: products[idx] });
-      } else if (msg.startsWith('__PRODUCTS_')) {
-        const indices = msg.replace('__PRODUCTS_', '').replace('__', '').split('_').map(Number);
-        addMessage({ type: 'productCards', products: indices.map((j) => products[j]) });
-      } else if (msg === '__ORDER__') {
-        addMessage({ type: 'orderSummary' });
       } else if (msg.startsWith('__PRODUCT_DETAIL_')) {
         const idx = parseInt(msg.replace('__PRODUCT_DETAIL_', '').replace('__', ''));
         addMessage({ type: 'productDetail', product: products[idx] });
+      } else if (msg.startsWith('__PRODUCTS_')) {
+        const indices = msg.replace('__PRODUCTS_', '').replace('__', '').split('_').map(Number);
+        addMessage({ type: 'productCards', products: indices.map((j) => products[j]) });
+      } else if (msg.startsWith('__PRODUCT_')) {
+        const idx = parseInt(msg.replace('__PRODUCT_', '').replace('__', ''));
+        addMessage({ type: 'productCard', product: products[idx] });
+      } else if (msg === '__ORDER__') {
+        addMessage({ type: 'orderSummary' });
       } else if (msg === '__HOME_ADDRESS__') {
         addMessage({ type: 'homeAddress' });
       } else if (msg === '__OFFICE_ADDRESS__') {
