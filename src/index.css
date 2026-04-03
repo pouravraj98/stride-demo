@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: #f8f6f3;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+}
+#root { min-height: 100vh; }
+button { cursor: pointer; }
+a { cursor: default; }
