@@ -179,28 +179,32 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
 
   useEffect(() => { scrollBottom(); }, [messages, scrollBottom]);
 
-  // Handle mobile keyboard — resize chat to visual viewport
+  // Handle mobile keyboard — scroll to bottom when keyboard opens
   useEffect(() => {
-    if (!window.visualViewport) return;
+    if (!window.visualViewport || !open) return;
     const vv = window.visualViewport;
-    const popup = document.querySelector('.chat-popup');
     const handleResize = () => {
-      if (popup && open) {
-        popup.style.height = `${vv.height}px`;
-        popup.style.top = `${vv.offsetTop}px`;
-      }
-    };
-    const handleClose = () => {
-      if (popup) { popup.style.height = ''; popup.style.top = ''; }
+      // Scroll messages to bottom after keyboard resize settles
+      setTimeout(() => {
+        msgsEndRef.current?.scrollIntoView({ behavior: 'instant' });
+      }, 100);
     };
     vv.addEventListener('resize', handleResize);
-    vv.addEventListener('scroll', handleResize);
-    return () => {
-      vv.removeEventListener('resize', handleResize);
-      vv.removeEventListener('scroll', handleResize);
-      handleClose();
-    };
+    return () => vv.removeEventListener('resize', handleResize);
   }, [open]);
+
+  // Also scroll to bottom when input is focused (keyboard opening)
+  useEffect(() => {
+    const input = inputRef.current;
+    if (!input) return;
+    const handleFocus = () => {
+      setTimeout(() => {
+        msgsEndRef.current?.scrollIntoView({ behavior: 'instant' });
+      }, 300);
+    };
+    input.addEventListener('focus', handleFocus);
+    return () => input.removeEventListener('focus', handleFocus);
+  }, []);
 
   // ── Play AI messages ──
   async function playAI(step) {
