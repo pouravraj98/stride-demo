@@ -9,7 +9,7 @@ export const toolDeclarations = [
       properties: {
         product_id: {
           type: 'INTEGER',
-          description: 'Product ID from the catalog (0-7)',
+          description: 'Product index from the catalog (0-9)',
         },
       },
       required: ['product_id'],
@@ -23,7 +23,7 @@ export const toolDeclarations = [
       properties: {
         product_id: {
           type: 'INTEGER',
-          description: 'Product ID (0-7). Full detail only available for ID 1.',
+          description: 'Product index (0-9). Full detail with images/reviews only available for index 1.',
         },
       },
       required: ['product_id'],
