@@ -9,6 +9,6 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100%;
 }
-#root { min-height: 100vh; }
+#root { min-height: 100vh; border: none; outline: none; max-width: 100%; overflow-x: hidden; }
 button { cursor: pointer; }
 a { cursor: default; }
