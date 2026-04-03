@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
@@ -8,6 +8,11 @@ import './App.css';
 
 export default function App() {
   const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = chatOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [chatOpen]);
   const [cartCount, setCartCount] = useState(0);
   const [showFinale, setShowFinale] = useState(false);
 
