@@ -104,6 +104,64 @@ function ConfirmationCard() {
   );
 }
 
+// Order history data
+const orderHistory = {
+  'ST-4821': {
+    id: 'ST-4821', status: 'Delivered', statusColor: 'green',
+    date: 'March 28, 2026', address: 'Home — 456 Oak Ave',
+    items: [{ name: 'Reebok Classic Leather', size: '10', color: 'Black', price: 90, image: products[0].image }],
+    total: 93.43, tracking: null,
+  },
+  'ST-5102': {
+    id: 'ST-5102', status: 'In Transit', statusColor: 'blue',
+    date: 'Expected April 5, 2026', address: 'Office — 200 Congress Ave',
+    items: [
+      { name: 'Essential Crew Tee', size: 'M', color: 'Black', price: 28, image: products[5].image },
+      { name: "Levi's 501 Jeans", size: '32x32', color: 'Dark Indigo', price: 70, image: products[8].image },
+    ],
+    total: 101.43, tracking: 'UPS 1Z999AA10123456784',
+  },
+  'ST-5387': {
+    id: 'ST-5387', status: 'Processing', statusColor: 'orange',
+    date: 'Ordered April 2, 2026', address: 'Home — 456 Oak Ave',
+    items: [{ name: 'Performance Joggers', size: 'M', color: 'Black', price: 48, image: products[9].image }],
+    total: 51.43, tracking: null,
+  },
+};
+
+function OrderStatusCard({ orderId }) {
+  const order = orderHistory[orderId];
+  if (!order) return null;
+  const statusStyles = { green: '#2d8a4e', blue: '#2563eb', orange: '#d97706' };
+  const statusBg = { green: 'rgba(45,138,78,.08)', blue: 'rgba(37,99,235,.08)', orange: 'rgba(217,119,6,.08)' };
+  return (
+    <div className="ch-card order-status-card">
+      <div className="os-header">
+        <span className="os-id">Order #{order.id}</span>
+        <span className="os-status" style={{ color: statusStyles[order.statusColor], background: statusBg[order.statusColor] }}>
+          {order.status}
+        </span>
+      </div>
+      <div className="ch-card-divider" />
+      {order.items.map((item, i) => (
+        <div key={i} className="ch-card-item">
+          <div className="ch-card-item-img"><img src={item.image} alt={item.name} /></div>
+          <div className="ch-card-item-info">
+            <strong>{item.name}</strong>
+            <span>{item.color} &middot; Size {item.size}</span>
+          </div>
+          <span className="ch-card-item-price">${item.price}.00</span>
+        </div>
+      ))}
+      <div className="ch-card-divider" />
+      <div className="ch-card-row"><span>Total</span><span>${order.total.toFixed(2)}</span></div>
+      <div className="ch-card-row"><span>Date</span><span>{order.date}</span></div>
+      <div className="ch-card-row"><span>Ship to</span><span>{order.address}</span></div>
+      {order.tracking && <div className="ch-card-row"><span>Tracking</span><span style={{fontSize:'11px'}}>{order.tracking}</span></div>}
+    </div>
+  );
+}
+
 function ProductDetail({ product, onExpandImage }) {
   const imgs = product.images || [product.image];
   const stars = (n) => '\u2605'.repeat(n) + '\u2606'.repeat(5 - n);
@@ -330,6 +388,10 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         addMessage({ type: 'confirmation' });
         break;
       }
+      case 'show_order_status': {
+        addMessage({ type: 'orderStatus', orderId: args.order_id });
+        break;
+      }
     }
   }
 
@@ -494,6 +556,8 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         return <div key={idx} className="processing-anim"><div className="processing-spinner" /><span>Processing payment&hellip;</span></div>;
       case 'confirmation':
         return <div key={idx} className="ch-special"><ConfirmationCard /></div>;
+      case 'orderStatus':
+        return <div key={idx} className="ch-special"><OrderStatusCard orderId={msg.orderId} /></div>;
       case 'uploadProgress':
         return (
           <div key={idx} className="upload-progress">

@@ -421,6 +421,11 @@
 .confirm-num { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
 .confirm-card .ch-card-row { text-align: left; }
 
+/* Order status card */
+.os-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.os-id { font-size: 15px; font-weight: 700; }
+.os-status { font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: .5px; }
+
 /* Chat footer */
 .ch-foot { padding: 0 20px 18px; flex-shrink: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }

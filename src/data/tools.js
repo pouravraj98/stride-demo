@@ -93,4 +93,18 @@ export const toolDeclarations = [
       properties: {},
     },
   },
+  {
+    name: 'show_order_status',
+    description: 'Show order status card for a past order. Use when user asks about their order status, tracking, or delivery.',
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        order_id: {
+          type: 'STRING',
+          description: 'Order ID like "ST-4821", "ST-5102", or "ST-5387"',
+        },
+      },
+      required: ['order_id'],
+    },
+  },
 ];
