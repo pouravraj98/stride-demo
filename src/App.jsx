@@ -34,17 +34,22 @@ export default function App() {
 
       <ProductGrid />
 
-      {/* AI FAB */}
-      <button
-        className={`ai-fab${chatOpen ? ' hidden' : ''}`}
-        onClick={() => setChatOpen(true)}
-        title="Ask AI Stylist"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-          <path d="M8 10h.01M12 10h.01M16 10h.01"/>
-        </svg>
-      </button>
+      {/* AI Floating Bar */}
+      <div className={`ai-bar${chatOpen ? ' hidden' : ''}`} onClick={() => setChatOpen(true)}>
+        <div className="ai-bar-inner">
+          <div className="ai-bar-left">
+            <div className="ai-bar-avatar">S</div>
+            <div className="ai-bar-info">
+              <div className="ai-bar-name">STRIDE AI <span className="ai-bar-status">Online</span></div>
+              <div className="ai-bar-desc">Find products, identify shoes from a photo, or get styled</div>
+            </div>
+          </div>
+          <div className="ai-bar-input">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <span>Ask me anything...</span>
+          </div>
+        </div>
+      </div>
 
       {/* Chat */}
       <Chat
