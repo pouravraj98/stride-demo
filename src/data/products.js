@@ -25,8 +25,9 @@ export const products = [
     // Detail page data
     images: [
       T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=600&hei=600&fmt=pjpeg',
-      T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=600&hei=600&fmt=pjpeg&scl=1.2&op_usm=1.5,0.8,6,0',
-      T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=600&hei=600&fmt=pjpeg&op_brightness=-10',
+      T + 'GUEST_a95e1352-4ba4-4c07-bba2-1d04ab579927?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_fedab577-a701-41fa-a9af-5d3319187e76?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_9a843004-51de-4686-8c18-3c6e05ab196a?wid=600&hei=600&fmt=pjpeg',
     ],
     description: 'Clean white leather sneaker with a minimalist design. Premium leather upper with a cushioned memory foam insole for all-day comfort. Versatile enough for the office, weekends, or a night out.',
     features: [
