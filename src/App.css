@@ -389,15 +389,16 @@
 .pd-scroll {
   display: flex; gap: 10px; overflow-x: scroll; overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  padding: 4px 24px 12px 40px;
+  padding: 4px 24px 12px 0;
   -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
 .pd-scroll::-webkit-scrollbar { display: none; }
 .pd-scroll-item {
-  flex: 0 0 72%; max-width: 320px; aspect-ratio: 1;
+  flex: 0 0 65%; max-width: 300px; aspect-ratio: 1;
   border-radius: 16px; overflow: hidden; background: #f0eeeb;
   scroll-snap-align: start; display: flex; align-items: center; justify-content: center;
 }
+.pd-scroll-item:first-child { margin-left: 16px; }
 .pd-scroll-item img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
 
 /* Product info card below the scroll strip */
