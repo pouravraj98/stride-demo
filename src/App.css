@@ -385,15 +385,16 @@
 /* ═══ PRODUCT DETAIL ═══ */
 
 /* Horizontal scrollable image strip — edge to edge */
-.pd-detail-wrap { width: 100%; animation: msgIn .35s ease-out both; }
+.pd-detail-wrap { width: 100%; animation: msgIn .35s ease-out both; overflow: visible; }
 .pd-scroll {
-  display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
-  padding: 4px 24px 12px; margin: 0 -24px; /* bleed to chat edges */
+  display: flex; gap: 10px; overflow-x: scroll; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 4px 24px 12px;
   -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
 .pd-scroll::-webkit-scrollbar { display: none; }
 .pd-scroll-item {
-  flex-shrink: 0; width: 75%; max-width: 320px; aspect-ratio: 1;
+  flex: 0 0 72%; max-width: 320px; aspect-ratio: 1;
   border-radius: 16px; overflow: hidden; background: #f0eeeb;
   scroll-snap-align: start; display: flex; align-items: center; justify-content: center;
 }
