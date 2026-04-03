@@ -2,7 +2,7 @@ import { systemPrompt } from '../data/systemPrompt';
 import { toolDeclarations } from '../data/tools';
 
 const API_KEY = import.meta.env.VITE_GEMINI_KEY;
-const MODEL = 'gemini-2.0-flash-lite';
+const MODEL = 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
 /**
