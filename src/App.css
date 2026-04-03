@@ -382,6 +382,43 @@
 .send-btn:disabled { opacity: .15; cursor: not-allowed; }
 .send-btn svg { width: 16px; height: 16px; }
 
+/* ═══ PRODUCT DETAIL CARD ═══ */
+.product-detail { padding: 0; overflow: hidden; }
+.pd-carousel { position: relative; background: #f0eeeb; }
+.pd-main-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.pd-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 32px; height: 32px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,.85); color: var(--t1); font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px); transition: all .2s;
+}
+.pd-arrow:hover { background: #fff; }
+.pd-prev { left: 10px; }
+.pd-next { right: 10px; }
+.pd-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+.pd-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5);
+  cursor: pointer; transition: all .2s;
+}
+.pd-dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+.pd-info { padding: 18px; }
+.pd-name { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.pd-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.pd-price { font-size: 20px; font-weight: 700; }
+.pd-rating { font-size: 12px; color: var(--t3); }
+.pd-rating .star { color: #d4a017; }
+.pd-desc { font-size: 13px; color: var(--t2); line-height: 1.6; margin-bottom: 16px; }
+.pd-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--t3); margin-bottom: 8px; }
+.pd-features { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+.pd-features li { font-size: 12.5px; color: var(--t2); padding-left: 18px; position: relative; }
+.pd-features li::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-size: 11px; }
+.pd-reviews { display: flex; flex-direction: column; gap: 10px; }
+.pd-review { padding: 10px 12px; background: var(--bg); border-radius: 10px; }
+.pd-review-stars { font-size: 12px; color: #d4a017; margin-bottom: 4px; letter-spacing: 1px; }
+.pd-review-text { font-size: 12.5px; color: var(--t1); line-height: 1.5; margin-bottom: 4px; font-style: italic; }
+.pd-review-author { font-size: 11px; color: var(--t3); }
+
 /* ═══ FINALE ═══ */
 .finale {
   position: fixed; inset: 0; z-index: 500;

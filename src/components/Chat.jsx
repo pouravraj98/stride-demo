@@ -86,6 +86,60 @@ function PaymentCard() {
   );
 }
 
+function ProductDetail({ product }) {
+  const [activeImg, setActiveImg] = useState(0);
+  const imgs = product.images || [product.image];
+  const stars = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
+
+  return (
+    <div className="ch-card product-detail">
+      {/* Image carousel */}
+      <div className="pd-carousel">
+        <img src={imgs[activeImg]} alt={product.name} className="pd-main-img" />
+        {imgs.length > 1 && (
+          <>
+            <button className="pd-arrow pd-prev" onClick={() => setActiveImg((activeImg - 1 + imgs.length) % imgs.length)}>&#8249;</button>
+            <button className="pd-arrow pd-next" onClick={() => setActiveImg((activeImg + 1) % imgs.length)}>&#8250;</button>
+            <div className="pd-dots">
+              {imgs.map((_, i) => (
+                <span key={i} className={`pd-dot${i === activeImg ? ' active' : ''}`} onClick={() => setActiveImg(i)} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Info */}
+      <div className="pd-info">
+        <div className="pd-name">{product.name}</div>
+        <div className="pd-meta">
+          <span className="pd-price">${product.price}.00</span>
+          <span className="pd-rating"><span className="star">★</span> {product.rating} ({product.reviews} reviews)</span>
+        </div>
+        <p className="pd-desc">{product.description}</p>
+
+        {/* Features */}
+        <div className="pd-section-title">Key Features</div>
+        <ul className="pd-features">
+          {product.features?.map((f, i) => <li key={i}>{f}</li>)}
+        </ul>
+
+        {/* Reviews */}
+        <div className="pd-section-title">Customer Reviews</div>
+        <div className="pd-reviews">
+          {product.customerReviews?.map((r, i) => (
+            <div key={i} className="pd-review">
+              <div className="pd-review-stars">{stars(r.rating)}</div>
+              <p className="pd-review-text">&ldquo;{r.text}&rdquo;</p>
+              <span className="pd-review-author">&mdash; {r.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ConfirmationCard() {
   return (
     <div className="ch-card confirm-card">
@@ -166,6 +220,9 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         addMessage({ type: 'productCards', products: indices.map((j) => products[j]) });
       } else if (msg === '__ORDER__') {
         addMessage({ type: 'orderSummary' });
+      } else if (msg.startsWith('__PRODUCT_DETAIL_')) {
+        const idx = parseInt(msg.replace('__PRODUCT_DETAIL_', '').replace('__', ''));
+        addMessage({ type: 'productDetail', product: products[idx] });
       } else if (msg === '__HOME_ADDRESS__') {
         addMessage({ type: 'homeAddress' });
       } else if (msg === '__OFFICE_ADDRESS__') {
@@ -294,6 +351,8 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
             {msg.products.map((p) => <ProductCardChat key={p.id} product={p} />)}
           </div>
         );
+      case 'productDetail':
+        return <div key={idx} className="ch-special"><ProductDetail product={msg.product} /></div>;
       case 'orderSummary':
         return <div key={idx} className="ch-special"><OrderSummary /></div>;
       case 'homeAddress':

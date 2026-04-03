@@ -31,18 +31,26 @@ export const flow = [
     ai: [
       'Here are 2 great alternatives under $60 in Size 10:',
       '__PRODUCTS_1_2__',
-      'The White Court is the closest match \u2014 clean, versatile, goes with everything. The Canvas Low-Top is more casual and relaxed. Which one?',
+      'The White Court is the closest match \u2014 clean, versatile, goes with everything. The Canvas Low-Top is more casual and relaxed. Which one interests you?',
     ],
   },
   {
-    // Step 5: Added to cart (user said "go with the White Court")
+    // Step 5: Product detail (user said "tell me more about the White Court")
+    ai: [
+      'Here\u2019s everything about the White Court Sneaker:',
+      '__PRODUCT_DETAIL_1__',
+      'Want me to add it to your cart?',
+    ],
+  },
+  {
+    // Step 6: Added to cart (user said "yes" / "add it")
     ai: [
       'White Court Sneaker, Size 10 \u2014 added to your cart \u2713',
       'Anything else you\u2019d like to add, or should I proceed to checkout?',
     ],
   },
   {
-    // Step 6: Order summary + address (user said "no, checkout" / "proceed to checkout")
+    // Step 7: Order summary + address (user said "no, checkout")
     ai: [
       'Here\u2019s your order summary:',
       '__ORDER__',
@@ -51,7 +59,7 @@ export const flow = [
     ],
   },
   {
-    // Step 7: Office address + payment (user said "no, send to office")
+    // Step 8: Office address + payment (user said "no, send to office")
     ai: [
       'Got it! Shipping to your office instead:',
       '__OFFICE_ADDRESS__',
@@ -60,7 +68,7 @@ export const flow = [
     ],
   },
   {
-    // Step 8: Processing + confirmed (user said "yes")
+    // Step 9: Processing + confirmed (user said "yes")
     ai: [
       '__PROCESSING__',
       '__CONFIRMED__',

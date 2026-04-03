@@ -22,6 +22,25 @@ export const products = [
     badge: 'Bestseller',
     image: T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=400&hei=400&fmt=pjpeg',
     sizes: ['8', '9', '10', '11', '12'],
+    // Detail page data
+    images: [
+      T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=600&hei=600&fmt=pjpeg&scl=1.2&op_usm=1.5,0.8,6,0',
+      T + 'GUEST_1933b21b-f55d-4a14-9f65-4c00fcc80134?wid=600&hei=600&fmt=pjpeg&op_brightness=-10',
+    ],
+    description: 'Clean white leather sneaker with a minimalist design. Premium leather upper with a cushioned memory foam insole for all-day comfort. Versatile enough for the office, weekends, or a night out.',
+    features: [
+      'Premium leather upper',
+      'Memory foam cushioned insole',
+      'Durable rubber outsole',
+      'Padded collar for ankle support',
+      'True to size fit',
+    ],
+    customerReviews: [
+      { name: 'Alex M.', rating: 5, text: 'Super comfortable right out of the box. Goes with literally everything in my closet.' },
+      { name: 'Sarah K.', rating: 4, text: 'Clean design, great quality for the price. Runs slightly narrow.' },
+      { name: 'Mike R.', rating: 5, text: 'My go-to everyday sneaker. Already bought a second pair in black.' },
+    ],
   },
   {
     id: 3,
