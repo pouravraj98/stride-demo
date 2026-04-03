@@ -88,55 +88,81 @@ function PaymentCard() {
 
 function ProductDetail({ product }) {
   const [activeImg, setActiveImg] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
   const imgs = product.images || [product.image];
   const stars = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
+  const prev = () => setActiveImg((activeImg - 1 + imgs.length) % imgs.length);
+  const next = () => setActiveImg((activeImg + 1) % imgs.length);
 
   return (
-    <div className="ch-card product-detail">
-      {/* Image carousel */}
-      <div className="pd-carousel">
-        <img src={imgs[activeImg]} alt={product.name} className="pd-main-img" />
+    <>
+      <div className="ch-card product-detail">
+        {/* Image carousel */}
+        <div className="pd-carousel">
+          <img src={imgs[activeImg]} alt={product.name} className="pd-main-img" onClick={() => setLightbox(true)} />
+          {imgs.length > 1 && (
+            <>
+              <button className="pd-arrow pd-prev" onClick={prev}>&#8249;</button>
+              <button className="pd-arrow pd-next" onClick={next}>&#8250;</button>
+            </>
+          )}
+          <button className="pd-expand" onClick={() => setLightbox(true)} title="Expand image">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+        </div>
+
+        {/* Thumbnails */}
         {imgs.length > 1 && (
-          <>
-            <button className="pd-arrow pd-prev" onClick={() => setActiveImg((activeImg - 1 + imgs.length) % imgs.length)}>&#8249;</button>
-            <button className="pd-arrow pd-next" onClick={() => setActiveImg((activeImg + 1) % imgs.length)}>&#8250;</button>
-            <div className="pd-dots">
-              {imgs.map((_, i) => (
-                <span key={i} className={`pd-dot${i === activeImg ? ' active' : ''}`} onClick={() => setActiveImg(i)} />
-              ))}
-            </div>
-          </>
+          <div className="pd-thumbs">
+            {imgs.map((img, i) => (
+              <div key={i} className={`pd-thumb${i === activeImg ? ' active' : ''}`} onClick={() => setActiveImg(i)}>
+                <img src={img} alt={`View ${i + 1}`} />
+              </div>
+            ))}
+          </div>
         )}
-      </div>
 
-      {/* Info */}
-      <div className="pd-info">
-        <div className="pd-name">{product.name}</div>
-        <div className="pd-meta">
-          <span className="pd-price">${product.price}.00</span>
-          <span className="pd-rating"><span className="star">★</span> {product.rating} ({product.reviews} reviews)</span>
-        </div>
-        <p className="pd-desc">{product.description}</p>
+        {/* Info */}
+        <div className="pd-info">
+          <div className="pd-name">{product.name}</div>
+          <div className="pd-meta">
+            <span className="pd-price">${product.price}.00</span>
+            <span className="pd-rating"><span className="star">★</span> {product.rating} ({product.reviews} reviews)</span>
+          </div>
+          <p className="pd-desc">{product.description}</p>
 
-        {/* Features */}
-        <div className="pd-section-title">Key Features</div>
-        <ul className="pd-features">
-          {product.features?.map((f, i) => <li key={i}>{f}</li>)}
-        </ul>
+          <div className="pd-section-title">Key Features</div>
+          <ul className="pd-features">
+            {product.features?.map((f, i) => <li key={i}>{f}</li>)}
+          </ul>
 
-        {/* Reviews */}
-        <div className="pd-section-title">Customer Reviews</div>
-        <div className="pd-reviews">
-          {product.customerReviews?.map((r, i) => (
-            <div key={i} className="pd-review">
-              <div className="pd-review-stars">{stars(r.rating)}</div>
-              <p className="pd-review-text">&ldquo;{r.text}&rdquo;</p>
-              <span className="pd-review-author">&mdash; {r.name}</span>
-            </div>
-          ))}
+          <div className="pd-section-title">Customer Reviews</div>
+          <div className="pd-reviews">
+            {product.customerReviews?.map((r, i) => (
+              <div key={i} className="pd-review">
+                <div className="pd-review-stars">{stars(r.rating)}</div>
+                <p className="pd-review-text">&ldquo;{r.text}&rdquo;</p>
+                <span className="pd-review-author">&mdash; {r.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div className="pd-lightbox" onClick={() => setLightbox(false)}>
+          <img src={imgs[activeImg]} alt={product.name} onClick={(e) => e.stopPropagation()} />
+          <button className="pd-lightbox-close" onClick={() => setLightbox(false)}>&#10005;</button>
+          {imgs.length > 1 && (
+            <>
+              <button className="pd-lightbox-arrow pd-lightbox-prev" onClick={(e) => { e.stopPropagation(); prev(); }}>&#8249;</button>
+              <button className="pd-lightbox-arrow pd-lightbox-next" onClick={(e) => { e.stopPropagation(); next(); }}>&#8250;</button>
+            </>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 
