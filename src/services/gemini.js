@@ -1,9 +1,9 @@
 import { systemPrompt } from '../data/systemPrompt';
 import { toolDeclarations } from '../data/tools';
 
-const API_KEY = import.meta.env.VITE_OPENAI_KEY;
-const MODEL = 'gpt-4o-mini';
-const API_URL = 'https://api.openai.com/v1/chat/completions';
+const API_KEY = import.meta.env.VITE_DEEPSEEK_KEY;
+const MODEL = 'deepseek-chat';
+const API_URL = 'https://api.deepseek.com/chat/completions';
 
 // Convert our tool declarations from Gemini format to OpenAI format
 function toOpenAITools(declarations) {
@@ -42,17 +42,12 @@ function toOpenAIMessages(history) {
   const messages = [{ role: 'system', content: systemPrompt }];
   for (const msg of history) {
     if (msg.role === 'user') {
-      const content = [];
-      for (const part of msg.parts) {
-        if (part.text) content.push({ type: 'text', text: part.text });
-        if (part.inlineData) {
-          content.push({
-            type: 'image_url',
-            image_url: { url: `data:${part.inlineData.mimeType};base64,${part.inlineData.data}` },
-          });
-        }
-      }
-      messages.push({ role: 'user', content });
+      const textContent = msg.parts
+        ?.filter((p) => p.text)
+        .map((p) => p.text)
+        .join('\n');
+      // DeepSeek doesn't support vision — skip image data, rely on text description
+      if (textContent) messages.push({ role: 'user', content: textContent });
     } else if (msg.role === 'model') {
       // Model messages may have text and function calls
       const textParts = msg.parts?.filter((p) => p.text).map((p) => p.text).join('\n');

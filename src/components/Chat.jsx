@@ -4,7 +4,7 @@ import { flow } from '../data/flow';
 import { sendMessage, userMessage, modelMessage } from '../services/gemini';
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-const LIVE_MODE = !!(import.meta.env.VITE_OPENAI_KEY || import.meta.env.VITE_GEMINI_KEY);
+const LIVE_MODE = !!(import.meta.env.VITE_DEEPSEEK_KEY || import.meta.env.VITE_OPENAI_KEY || import.meta.env.VITE_GEMINI_KEY);
 
 // ── Sub-components (unchanged) ──
 
