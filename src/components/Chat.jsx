@@ -163,7 +163,10 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
   const startedRef = useRef(false);
 
   const scrollBottom = useCallback(() => {
-    setTimeout(() => msgsEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
+    setTimeout(() => {
+      const container = document.querySelector('.ch-msgs');
+      if (container) container.scrollTop = container.scrollHeight;
+    }, 50);
   }, []);
 
   const addMessage = useCallback((msg) => {
@@ -179,32 +182,25 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
 
   useEffect(() => { scrollBottom(); }, [messages, scrollBottom]);
 
-  // Handle mobile keyboard — scroll to bottom when keyboard opens
+  // Scroll to bottom on keyboard open / viewport resize / input focus
   useEffect(() => {
-    if (!window.visualViewport || !open) return;
+    if (!open) return;
+    const doScroll = () => {
+      const c = document.querySelector('.ch-msgs');
+      if (c) c.scrollTop = c.scrollHeight;
+    };
+    // On visualViewport resize (keyboard open/close)
     const vv = window.visualViewport;
-    const handleResize = () => {
-      // Scroll messages to bottom after keyboard resize settles
-      setTimeout(() => {
-        msgsEndRef.current?.scrollIntoView({ behavior: 'instant' });
-      }, 100);
-    };
-    vv.addEventListener('resize', handleResize);
-    return () => vv.removeEventListener('resize', handleResize);
-  }, [open]);
-
-  // Also scroll to bottom when input is focused (keyboard opening)
-  useEffect(() => {
+    if (vv) vv.addEventListener('resize', () => setTimeout(doScroll, 50));
+    // On input focus
     const input = inputRef.current;
-    if (!input) return;
-    const handleFocus = () => {
-      setTimeout(() => {
-        msgsEndRef.current?.scrollIntoView({ behavior: 'instant' });
-      }, 300);
+    const onFocus = () => { setTimeout(doScroll, 100); setTimeout(doScroll, 400); };
+    if (input) input.addEventListener('focus', onFocus);
+    return () => {
+      if (vv) vv.removeEventListener('resize', doScroll);
+      if (input) input.removeEventListener('focus', onFocus);
     };
-    input.addEventListener('focus', handleFocus);
-    return () => input.removeEventListener('focus', handleFocus);
-  }, []);
+  }, [open]);
 
   // ── Play AI messages ──
   async function playAI(step) {
