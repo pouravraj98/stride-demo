@@ -566,11 +566,11 @@
 
   /* Chat popup — full screen on mobile */
   .chat-popup {
-    width: 100vw; height: 100vh; max-height: 100vh;
-    border-radius: 0; top: 0; left: 0;
-    transform: translateY(20px); /* override center positioning */
+    width: 100vw; height: 100dvh; max-height: 100dvh;
+    border-radius: 0; top: 0; left: 0; right: 0; bottom: 0;
+    transform: none;
   }
-  .chat-popup.open { transform: translateY(0); }
+  .chat-popup.open { transform: none; }
   .chat-backdrop { display: none; }
 
   .ch-head { padding: 14px 16px; }
