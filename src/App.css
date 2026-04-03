@@ -133,28 +133,52 @@
 }
 .ai-bar.hidden { transform: translateX(-50%) translateY(120%); opacity: 0; pointer-events: none; }
 .ai-bar-inner {
-  background: var(--white); border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
-  padding: 14px 18px; display: flex; flex-direction: column; gap: 12px;
-  transition: box-shadow .2s;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border-radius: 20px; position: relative; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.06) inset;
+  padding: 16px 20px; display: flex; flex-direction: column; gap: 12px;
+  transition: all .3s;
 }
-.ai-bar:hover .ai-bar-inner { box-shadow: 0 8px 36px rgba(0,0,0,.16), 0 0 0 1px rgba(0,0,0,.06); }
-.ai-bar-left { display: flex; align-items: center; gap: 10px; }
+.ai-bar:hover .ai-bar-inner { box-shadow: 0 12px 44px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.1) inset; transform: translateY(-2px); }
+/* Subtle animated shimmer */
+.ai-bar-inner::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.04) 45%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.04) 55%, transparent 70%);
+  background-size: 200% 100%;
+  animation: barShimmer 3s ease-in-out infinite;
+}
+@keyframes barShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.ai-bar-left { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
 .ai-bar-avatar {
-  width: 34px; height: 34px; border-radius: 50%; background: var(--accent);
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, #b08050, #d4a870);
   color: #fff; display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0;
+  font-size: 14px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(176,128,80,.4);
+  animation: avatarGlow 2s ease-in-out infinite alternate;
+}
+@keyframes avatarGlow {
+  0% { box-shadow: 0 0 12px rgba(176,128,80,.3); }
+  100% { box-shadow: 0 0 24px rgba(176,128,80,.6); }
 }
 .ai-bar-info { flex: 1; }
-.ai-bar-name { font-size: 13px; font-weight: 700; letter-spacing: .5px; }
-.ai-bar-status { font-size: 10px; font-weight: 500; color: var(--green); margin-left: 6px; }
-.ai-bar-desc { font-size: 11.5px; color: var(--t3); margin-top: 1px; }
-.ai-bar-input {
-  display: flex; align-items: center; gap: 8px; padding: 11px 16px;
-  background: var(--bg); border-radius: 12px; border: 1px solid var(--bdr);
-  color: var(--t4); font-size: 13.5px; transition: border-color .2s;
+.ai-bar-name { font-size: 13.5px; font-weight: 700; letter-spacing: .5px; color: #fff; }
+.ai-bar-status {
+  font-size: 10px; font-weight: 600; color: #5dcc7a; margin-left: 8px;
+  display: inline-flex; align-items: center; gap: 4px;
 }
-.ai-bar:hover .ai-bar-input { border-color: var(--accent); }
+.ai-bar-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #5dcc7a; animation: statusPulse 2s ease-in-out infinite; }
+@keyframes statusPulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.ai-bar-desc { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 2px; }
+.ai-bar-input {
+  display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+  background: rgba(255,255,255,.08); border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.35); font-size: 13.5px;
+  transition: all .2s; position: relative; z-index: 1;
+}
+.ai-bar-input svg { color: rgba(255,255,255,.3); }
+.ai-bar:hover .ai-bar-input { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.18); }
 
 /* ═══ CHAT OVERLAY ═══ */
 .chat-backdrop {
