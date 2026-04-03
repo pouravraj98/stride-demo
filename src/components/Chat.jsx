@@ -162,10 +162,15 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
   const fileInputRef = useRef(null);
   const startedRef = useRef(false);
 
-  const scrollBottom = useCallback(() => {
+  const scrollBottom = useCallback((toElement) => {
     setTimeout(() => {
-      const container = document.querySelector('.ch-msgs');
-      if (container) container.scrollTop = container.scrollHeight;
+      if (toElement) {
+        // Scroll so the element is at the top of the visible area
+        toElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        const container = document.querySelector('.ch-msgs');
+        if (container) container.scrollTop = container.scrollHeight;
+      }
     }, 50);
   }, []);
 
@@ -232,6 +237,12 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
       } else if (msg.startsWith('__PRODUCT_DETAIL_')) {
         const idx = parseInt(msg.replace('__PRODUCT_DETAIL_', '').replace('__', ''));
         addMessage({ type: 'productDetail', product: products[idx] });
+        await wait(80);
+        // Scroll to top of this card, not bottom
+        const el = document.querySelector('.ch-msgs').lastElementChild;
+        if (el) scrollBottom(el);
+        await wait(200);
+        continue; // skip default scroll
       } else if (msg.startsWith('__PRODUCTS_')) {
         const indices = msg.replace('__PRODUCTS_', '').replace('__', '').split('_').map(Number);
         addMessage({ type: 'productCards', products: indices.map((j) => products[j]) });
@@ -240,6 +251,11 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         addMessage({ type: 'productCard', product: products[idx] });
       } else if (msg === '__ORDER__') {
         addMessage({ type: 'orderSummary' });
+        await wait(80);
+        const el = document.querySelector('.ch-msgs').lastElementChild;
+        if (el) scrollBottom(el);
+        await wait(200);
+        continue;
       } else if (msg === '__HOME_ADDRESS__') {
         addMessage({ type: 'homeAddress' });
       } else if (msg === '__OFFICE_ADDRESS__') {
