@@ -95,7 +95,7 @@ export const toolDeclarations = [
   },
   {
     name: 'show_order_status',
-    description: 'Show order status card for a past order. Use when user asks about their order status, tracking, or delivery.',
+    description: 'Show order status card with timeline for a specific order. Use when user asks about a specific order.',
     parameters: {
       type: 'OBJECT',
       properties: {
@@ -105,6 +105,14 @@ export const toolDeclarations = [
         },
       },
       required: ['order_id'],
+    },
+  },
+  {
+    name: 'show_all_orders',
+    description: 'Show all past orders as summary cards. Use when user asks "whats my order status", "my orders", or a general question about orders without specifying which one. This shows all orders so the user can pick one.',
+    parameters: {
+      type: 'OBJECT',
+      properties: {},
     },
   },
 ];

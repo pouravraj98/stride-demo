@@ -447,6 +447,9 @@
 .os-step-detail { font-size: 11px; color: var(--t3); }
 .os-step-pending .os-step-detail { color: var(--t4); }
 .os-arrival { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; border: 1px solid; font-size: 12.5px; font-weight: 600; }
+.os-all-orders { display: flex; flex-direction: column; gap: 8px; }
+.os-mini-card { padding: 14px !important; }
+.os-mini-arrival { font-size: 11px; color: var(--t3); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--bdr); }
 
 /* Chat footer */
 .ch-foot { padding: 0 20px 18px; flex-shrink: 0; }

@@ -191,6 +191,32 @@ function OrderStatusCard({ orderId }) {
   );
 }
 
+function AllOrdersCard() {
+  const orders = Object.values(orderHistory);
+  const colors = { green: '#2d8a4e', blue: '#2563eb', orange: '#d97706' };
+  const bgColors = { green: 'rgba(45,138,78,.08)', blue: 'rgba(37,99,235,.08)', orange: 'rgba(217,119,6,.08)' };
+  return (
+    <div className="os-all-orders">
+      {orders.map((order) => (
+        <div key={order.id} className="ch-card os-mini-card">
+          <div className="os-header">
+            <span className="os-id">#{order.id}</span>
+            <span className="os-status" style={{ color: colors[order.statusColor], background: bgColors[order.statusColor] }}>{order.status}</span>
+          </div>
+          <div className="os-product" style={{ marginBottom: 0, paddingBottom: 0, border: 'none' }}>
+            <div className="os-product-img"><img src={order.item.image} alt={order.item.name} /></div>
+            <div className="os-product-info">
+              <strong>{order.item.name}</strong>
+              <span>{order.item.color} &middot; Size {order.item.size}</span>
+            </div>
+          </div>
+          <div className="os-mini-arrival">{order.arrival}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ProductDetail({ product, onExpandImage }) {
   const imgs = product.images || [product.image];
   const stars = (n) => '\u2605'.repeat(n) + '\u2606'.repeat(5 - n);
@@ -421,6 +447,10 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         addMessage({ type: 'orderStatus', orderId: args.order_id });
         break;
       }
+      case 'show_all_orders': {
+        addMessage({ type: 'allOrders' });
+        break;
+      }
     }
   }
 
@@ -587,6 +617,8 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
         return <div key={idx} className="ch-special"><ConfirmationCard /></div>;
       case 'orderStatus':
         return <div key={idx} className="ch-special"><OrderStatusCard orderId={msg.orderId} /></div>;
+      case 'allOrders':
+        return <div key={idx} className="ch-special"><AllOrdersCard /></div>;
       case 'uploadProgress':
         return (
           <div key={idx} className="upload-progress">

@@ -68,11 +68,10 @@ Order #ST-5387 — Performance Joggers (Black, Size M) — $51.43
   Shipped to: Home (456 Oak Ave)
 
 When user asks about order status:
-- If they say "my order" and have multiple orders, ask WHICH order they mean (show all 3 briefly)
-- If they mention a specific item (e.g. "where are my jeans"), find the matching order
-- If they say "latest order" or "recent order", show the most recent one (#ST-5387)
-- Use show_order_status tool to display the order card
-- You can also mention tracking numbers when relevant
+- If general question ("my orders", "order status", "where are my packages") → call show_all_orders() to display all orders as cards. NEVER list orders in plain text.
+- If they mention a specific item (e.g. "where are my jeans") → find the matching order and call show_order_status with that order ID
+- If they say "latest order" or "recent order" → call show_order_status with "ST-5387"
+- After showing all orders, if user picks one, call show_order_status for that specific order
 
 ## Tool Usage
 
@@ -85,7 +84,8 @@ IMPORTANT: Use tools to show rich UI cards. Always include a brief text message 
 - show_address(type) → "home" or "office" — pick based on context (if user says "office" or "work", use "office")
 - show_payment() → Before asking user to confirm payment
 - process_order() → ONLY after user explicitly confirms payment (says yes, confirm, pay, etc.)
-- show_order_status(order_id) → When user asks about an order status. Pass the order ID like "ST-4821"
+- show_order_status(order_id) → When user asks about a SPECIFIC order. Pass the order ID like "ST-4821"
+- show_all_orders() → When user asks a GENERAL order question like "whats my order status", "my orders", "where are my packages". Shows all orders as cards so user can pick one. ALWAYS use this instead of listing orders in text.
 
 ## Important Rules
 1. The product_id in tool calls is the INDEX (0-based) in the catalog array, NOT the product's id field
