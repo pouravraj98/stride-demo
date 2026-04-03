@@ -4,7 +4,7 @@ import { flow } from '../data/flow';
 import { sendMessage, userMessage, modelMessage } from '../services/gemini';
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-const LIVE_MODE = !!import.meta.env.VITE_GEMINI_KEY;
+const LIVE_MODE = false; // set to true to enable Gemini AI agent
 
 // ── Sub-components (unchanged) ──
 
@@ -649,11 +649,8 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
           <div className="ch-av">S</div>
           <div className="ch-info">
             <h3>STRIDE AI</h3>
-            <span className="ch-status">{isLive ? 'Live AI' : 'Demo Mode'}</span>
+            <span className="ch-status">Online</span>
           </div>
-          <button className="ch-mode" onClick={() => { setIsLive(!isLive); resetDemo(); }} title={isLive ? 'Switch to scripted' : 'Switch to live AI'}>
-            {isLive ? '🤖' : '📝'}
-          </button>
           <button className="ch-restart" onClick={resetDemo} title="Restart conversation">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
           </button>
