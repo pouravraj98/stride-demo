@@ -17,7 +17,7 @@ export const toolDeclarations = [
   },
   {
     name: 'show_product_detail',
-    description: 'Show detailed product view with image carousel, description, features, and customer reviews. Use when user asks for more information about a product. Only product ID 1 (White Court Sneaker) has full detail data.',
+    description: 'Show detailed product view with description, features, and customer reviews. Use when user asks for more information, details, or reviews about a product. All products have detail data.',
     parameters: {
       type: 'OBJECT',
       properties: {

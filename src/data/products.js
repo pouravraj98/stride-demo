@@ -11,6 +11,12 @@ export const products = [
     category: 'Sneakers',
     badge: 'Popular',
     image: T + 'GUEST_7755227c-d351-4be2-97a1-9dc9dc01b18c?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_7755227c-d351-4be2-97a1-9dc9dc01b18c?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_5aeacf5f-3464-4957-915a-5c0042c17d36?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_dbb6cb1e-9ed9-411c-9fef-e3cf567ba794?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_77ef7842-4bc6-4960-b6ba-41b6fcc2087e?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['8', '9', '10', '11', '12', '13'],
     color: 'Black',
     material: 'Full grain leather upper, rubber sole',
@@ -18,6 +24,13 @@ export const products = [
     use: ['Casual', 'Everyday', 'Streetwear'],
     visual: 'All-black low-top leather sneaker with clean lines, subtle Reebok logo on the side, flat rubber sole, retro 80s silhouette',
     gender: 'Unisex',
+    description: 'The icon that started it all. Full grain leather upper delivers premium durability and a clean look that only gets better with age. The die-cut EVA midsole provides lightweight cushioning for all-day comfort.',
+    features: ['Full grain leather upper', 'Die-cut EVA midsole', 'High-abrasion rubber outsole', 'Padded foam sockliner', 'Classic Reebok window box logo'],
+    customerReviews: [
+      { name: 'James T.', rating: 5, text: 'Had a pair of these in the 80s. The new ones are just as good. Timeless shoe.' },
+      { name: 'David L.', rating: 4, text: 'Really solid leather quality. Took a few days to break in but super comfy now.' },
+      { name: 'Chris W.', rating: 5, text: 'All black goes with everything. My daily driver for 6 months and still looks great.' },
+    ],
   },
   {
     id: 2,
@@ -65,6 +78,12 @@ export const products = [
     category: 'Sneakers',
     badge: '',
     image: T + 'GUEST_74b476d5-bcd3-4d71-9c51-cd31283eb222?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_74b476d5-bcd3-4d71-9c51-cd31283eb222?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_9c534617-a932-40f9-85ce-0006ccce6ccf?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_84cfdcd8-3a95-4324-9ade-3dc9da3e1d5e?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_5d199476-dfea-4019-b82d-23c56cceafd7?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['8', '9', '10', '11', '12', '13'],
     color: 'Navy Blue',
     material: 'Cotton canvas upper, leather heel tab, rubber sole',
@@ -72,6 +91,13 @@ export const products = [
     use: ['Weekend', 'Beach', 'Casual Friday', 'Walking'],
     visual: 'Navy blue canvas low-top sneaker with white rubber sole, brown leather heel accent, striped interior lining, relaxed shape',
     gender: 'Men',
+    description: 'Lightweight canvas sneaker perfect for warm weather. The cotton canvas upper breathes easily while the leather heel tab adds a premium detail. Cushioned insole keeps you comfortable from morning to night.',
+    features: ['Cotton canvas upper', 'Leather heel accent', 'Cushioned removable insole', 'Vulcanized rubber sole', 'Striped cotton lining'],
+    customerReviews: [
+      { name: 'Ryan P.', rating: 5, text: 'Perfect summer shoe. Light, breathable, looks great with shorts or jeans.' },
+      { name: 'Tom H.', rating: 4, text: 'Nice casual shoe for the price. The navy blue is a great color.' },
+      { name: 'Jake M.', rating: 5, text: 'Bought these for vacation and ended up wearing them every day after.' },
+    ],
   },
   {
     id: 4,
@@ -82,6 +108,12 @@ export const products = [
     category: 'Sneakers',
     badge: 'New',
     image: T + 'GUEST_2a3e6d0c-24d7-4831-9694-173ba85b940c?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_2a3e6d0c-24d7-4831-9694-173ba85b940c?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_996b63e4-a875-4ba4-a1f8-e120dc9ce183?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_a69cee2c-3d92-4af5-833d-d42b8765121b?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_9cebf330-2cde-4c64-94d7-cb9053b04082?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['8', '9', '10', '11', '12'],
     color: 'Black',
     material: 'Nylon and suede upper, EVA midsole, rubber outsole',
@@ -89,6 +121,13 @@ export const products = [
     use: ['Casual', 'Active', 'Streetwear', 'Light running'],
     visual: 'All-black lightweight sneaker with nylon mesh and suede overlay panels, Reebok flag logo on side, slim running shoe silhouette',
     gender: 'Unisex',
+    description: 'A heritage running silhouette updated for everyday wear. The nylon and suede upper keeps things lightweight while the EVA midsole provides responsive cushioning. Slim profile looks great with joggers or jeans.',
+    features: ['Nylon and suede upper', 'EVA midsole cushioning', 'Durable rubber outsole', 'Lightweight at 9.5 oz', 'Breathable mesh lining'],
+    customerReviews: [
+      { name: 'Marcus B.', rating: 4, text: 'Great lightweight shoe. I walk 5 miles a day in these no problem.' },
+      { name: 'Kevin R.', rating: 5, text: 'Love the retro running look. Way more comfortable than they look.' },
+      { name: 'Andre S.', rating: 4, text: 'Solid everyday sneaker. The all-black colorway is very versatile.' },
+    ],
   },
   {
     id: 5,
@@ -99,6 +138,12 @@ export const products = [
     category: 'Sneakers',
     badge: '',
     image: T + 'GUEST_d4b197c6-bd6c-419b-8a31-ea8d25eadb31?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_d4b197c6-bd6c-419b-8a31-ea8d25eadb31?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_2f6845b7-34b8-42df-bcfb-8893aa62b10f?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_03c99d8d-cd92-4268-a8bb-f1884b8ef9a8?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_6521db7e-bf70-491c-bec3-e142e9aca32e?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['7', '8', '9', '10', '11', '12'],
     color: 'Black',
     material: 'Cotton-blend canvas, padded collar, rubber sole',
@@ -106,6 +151,13 @@ export const products = [
     use: ['Casual', 'School', 'Walking', 'Everyday'],
     visual: 'Simple black canvas lace-up sneaker with white rubber sole, minimal clean design, padded collar for comfort',
     gender: 'Unisex',
+    description: 'No-frills canvas sneaker that goes with everything. The cotton-blend upper is breathable and durable, while the padded collar keeps your ankles comfortable. A closet staple at an unbeatable price.',
+    features: ['Cotton-blend canvas upper', 'Padded collar construction', 'Flexible rubber outsole', 'Cushioned footbed', 'Easy lace-up closure'],
+    customerReviews: [
+      { name: 'Sam N.', rating: 5, text: 'Simple, clean, cheap. What more do you need? Bought 3 pairs.' },
+      { name: 'Leo C.', rating: 4, text: 'Good daily beater shoe. Comfortable right out of the box.' },
+      { name: 'Matt D.', rating: 4, text: 'Nice minimalist look. Canvas breaks in nicely after a week.' },
+    ],
   },
 
   // ═══ TOPS ═══
@@ -118,6 +170,12 @@ export const products = [
     category: 'Tops',
     badge: 'Bestseller',
     image: T + 'GUEST_4c486b21-23a6-4515-a82a-074bb61dce78?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_4c486b21-23a6-4515-a82a-074bb61dce78?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_aa645e29-0f6d-4ff7-b32f-9036c0b47fae?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_07b4caf0-963c-4640-b2f8-f02c09f17ee5?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_c64254bc-bc5b-4a4d-bd59-7666ff4a3842?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['S', 'M', 'L', 'XL'],
     color: 'Black',
     material: '100% ring-spun cotton, pre-shrunk',
@@ -125,6 +183,13 @@ export const products = [
     use: ['Everyday', 'Layering', 'Casual', 'Basics'],
     visual: 'Classic black crew neck t-shirt with relaxed fit, smooth soft cotton fabric, on male model with khaki pants',
     gender: 'Men',
+    description: 'The perfect black tee. Made from 100% ring-spun cotton that gets softer with every wash. Pre-shrunk so it keeps its shape. Relaxed fit sits just right — not too tight, not too baggy.',
+    features: ['100% ring-spun cotton', 'Pre-shrunk fabric', 'Relaxed everyday fit', 'Reinforced crew neck', 'Tag-free comfort label'],
+    customerReviews: [
+      { name: 'Alex R.', rating: 5, text: 'Best basic tee for the price. Soft cotton, holds color well after many washes.' },
+      { name: 'Jordan F.', rating: 5, text: 'I own 5 of these. Perfect for layering under jackets or wearing solo.' },
+      { name: 'Nick B.', rating: 4, text: 'Good quality everyday shirt. Runs true to size.' },
+    ],
   },
   {
     id: 7,
@@ -135,6 +200,12 @@ export const products = [
     category: 'Tops',
     badge: '',
     image: T + 'GUEST_e90d210e-7b9f-48a4-8b90-933b4e60c6c4?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_e90d210e-7b9f-48a4-8b90-933b4e60c6c4?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_380fbb8e-7f61-4435-8d6f-b480cc8a9646?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_9097b638-0aa2-49d1-a0df-2d79c7e76427?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_652dae8b-11cf-4c95-b4c6-3dd0d9430e30?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     color: 'Black',
     material: 'Piqué cotton, breathable',
@@ -142,6 +213,13 @@ export const products = [
     use: ['Office', 'Golf', 'Date night', 'Smart casual'],
     visual: 'Black piqué polo shirt with two-button placket, ribbed collar and sleeve cuffs, modern fit, on male model with tan pants',
     gender: 'Men',
+    description: 'Classic piqué polo updated with a modern fit. Breathable cotton fabric keeps you cool, while the ribbed collar and sleeve cuffs maintain a polished shape. Dress it up for the office or down for the weekend.',
+    features: ['Piqué cotton fabric', 'Two-button placket', 'Ribbed collar and cuffs', 'Modern tailored fit', 'Side vents for movement'],
+    customerReviews: [
+      { name: 'Brian K.', rating: 5, text: 'Perfect office polo. Looks professional but feels casual. Great fit.' },
+      { name: 'Steve M.', rating: 4, text: 'Nice quality for the price. The black doesn\'t fade after washing.' },
+      { name: 'Daniel P.', rating: 5, text: 'Wore this to a golf outing and got compliments. Comfortable all day.' },
+    ],
   },
   {
     id: 8,
@@ -152,6 +230,9 @@ export const products = [
     category: 'Tops',
     badge: '',
     image: T + 'GUEST_9b2e31dd-d436-4d6a-b35c-65d303ec1781?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_9b2e31dd-d436-4d6a-b35c-65d303ec1781?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['S', 'M', 'L', 'XL'],
     color: 'Blue',
     material: 'Soft stretch jersey, moisture-wicking',
@@ -159,6 +240,13 @@ export const products = [
     use: ['Gym', 'Running', 'Active wear', 'Casual'],
     visual: 'Light airway blue athletic crew neck t-shirt with stretch fabric, modern fit, moisture-wicking material',
     gender: 'Men',
+    description: 'Performance meets comfort. Soft stretch jersey moves with you during any workout while moisture-wicking fabric keeps you dry. Modern fit looks great at the gym or grabbing coffee after.',
+    features: ['Soft stretch jersey fabric', 'Moisture-wicking technology', '4-way stretch', 'Flatlock seams prevent chafing', 'Modern athletic fit'],
+    customerReviews: [
+      { name: 'Tyler G.', rating: 5, text: 'Best gym shirt I own. Doesn\'t stick to you when you sweat.' },
+      { name: 'Omar H.', rating: 4, text: 'Great color, nice fit. Light enough for hot weather workouts.' },
+      { name: 'Ethan W.', rating: 5, text: 'Bought this for running and now I wear it casually too. So comfortable.' },
+    ],
   },
 
   // ═══ BOTTOMS ═══
@@ -171,6 +259,12 @@ export const products = [
     category: 'Bottoms',
     badge: 'Popular',
     image: T + 'GUEST_632f4e97-3ccb-419a-bab5-b274d2608406?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_632f4e97-3ccb-419a-bab5-b274d2608406?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_f624998b-64a1-4b23-a368-13f0fea13097?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_3b2b7f0f-0ba9-4df1-abfe-461a0c64f26c?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_d43601a0-0d28-4b30-bf0c-3fbd59b68599?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['30x30', '32x30', '32x32', '34x32', '36x32'],
     color: 'Dark Indigo',
     material: '100% cotton denim, rigid',
@@ -178,6 +272,13 @@ export const products = [
     use: ['Everyday', 'Casual', 'Going out', 'Date night'],
     visual: 'Dark indigo straight-fit jeans shown from behind on model, classic 5-pocket design with Levi\'s leather patch and tab, raw selvedge hem',
     gender: 'Men',
+    description: 'The original blue jean since 1873. Rigid 100% cotton denim that molds to your body over time. Sits at the waist with a straight fit through the hip and thigh. The jean that started it all.',
+    features: ['100% cotton rigid denim', 'Button fly closure', 'Classic 5-pocket design', 'Straight fit through thigh', 'Iconic Levi\'s leather back patch'],
+    customerReviews: [
+      { name: 'Michael R.', rating: 5, text: 'Nothing beats 501s. These are the perfect dark wash. They look better with every wear.' },
+      { name: 'John S.', rating: 4, text: 'Classic fit, great quality. Takes a few washes to soften up but worth it.' },
+      { name: 'Carlos M.', rating: 5, text: 'The only jeans I buy. Dark indigo looks sharp dressed up or down.' },
+    ],
   },
   {
     id: 10,
@@ -188,6 +289,12 @@ export const products = [
     category: 'Bottoms',
     badge: '',
     image: T + 'GUEST_86cf8e93-400f-49b1-9e9d-ae5b021a70d8?wid=400&hei=400&fmt=pjpeg',
+    images: [
+      T + 'GUEST_86cf8e93-400f-49b1-9e9d-ae5b021a70d8?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_49a0418e-edf4-4771-9172-2390e260230e?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_4bd54004-edc7-4628-bf85-9ab77bcc3026?wid=600&hei=600&fmt=pjpeg',
+      T + 'GUEST_3f3f0740-92ab-4750-9c7f-7aeedf85df9b?wid=600&hei=600&fmt=pjpeg',
+    ],
     sizes: ['S', 'M', 'L', 'XL'],
     color: 'Black',
     material: 'Lightweight tricot, moisture-wicking, 4-way stretch',
@@ -195,6 +302,13 @@ export const products = [
     use: ['Gym', 'Running', 'Active lifestyle', 'Athleisure'],
     visual: 'Black tapered jogger pants with elastic waistband on model, zippered side pockets, cuffed ankles, worn with white sneakers',
     gender: 'Men',
+    description: 'From the gym to the street. Lightweight tricot fabric with 4-way stretch moves with you through any workout. Tapered leg with cuffed ankles gives a modern silhouette. Zippered pockets keep your phone secure.',
+    features: ['Lightweight tricot fabric', '4-way stretch', 'Moisture-wicking', 'Zippered side pockets', 'Elastic waistband with drawcord', 'Tapered leg with cuffed ankle'],
+    customerReviews: [
+      { name: 'Derek L.', rating: 5, text: 'Perfect for the gym and errands after. Look way more expensive than they are.' },
+      { name: 'Will T.', rating: 4, text: 'Great joggers for the price. The zippered pockets are clutch.' },
+      { name: 'Jason K.', rating: 5, text: 'Comfortable enough to sleep in, stylish enough to go out in. Win-win.' },
+    ],
   },
 ];
 

@@ -78,7 +78,7 @@ When user asks about order status:
 IMPORTANT: Use tools to show rich UI cards. Always include a brief text message WITH every tool call.
 
 - show_product(product_id) → When recommending or identifying a specific product
-- show_product_detail(product_id) → When user asks "tell me more" or wants details (only ID 1 has full detail data with images/reviews)
+- show_product_detail(product_id) → When user asks "tell me more" or wants details. All products have description, features, and reviews. Product index 1 (White Court) also has multiple images in a carousel.
 - show_products(product_ids) → When comparing 2+ products or showing alternatives
 - show_order_summary(product_id, size) → When user wants to buy / checkout
 - show_address(type) → "home" or "office" — pick based on context (if user says "office" or "work", use "office")
