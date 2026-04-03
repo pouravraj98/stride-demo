@@ -86,8 +86,7 @@ function PaymentCard() {
   );
 }
 
-function ProductDetail({ product }) {
-  const [expandedImg, setExpandedImg] = useState(null);
+function ProductDetail({ product, onExpandImage }) {
   const imgs = product.images || [product.image];
   const stars = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
 
@@ -96,7 +95,7 @@ function ProductDetail({ product }) {
       {/* Horizontal scrollable image strip */}
       <div className="pd-scroll">
         {imgs.map((img, i) => (
-          <div key={i} className="pd-scroll-item" onClick={() => setExpandedImg(i)}>
+          <div key={i} className="pd-scroll-item" onClick={() => onExpandImage(product, i)}>
             <img src={img} alt={`${product.name} view ${i + 1}`} />
             <div className="pd-scroll-expand">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -104,29 +103,6 @@ function ProductDetail({ product }) {
           </div>
         ))}
       </div>
-
-      {/* Expanded image overlay — inside chat, over messages */}
-      {expandedImg !== null && (
-        <div className="pd-expanded" onClick={() => setExpandedImg(null)}>
-          <div className="pd-expanded-inner" onClick={(e) => e.stopPropagation()}>
-            <img src={imgs[expandedImg]} alt={product.name} />
-            <button className="pd-expanded-close" onClick={() => setExpandedImg(null)}>&#10005;</button>
-            {imgs.length > 1 && (
-              <>
-                <button className="pd-expanded-arrow pd-expanded-prev" onClick={() => setExpandedImg((expandedImg - 1 + imgs.length) % imgs.length)}>&#8249;</button>
-                <button className="pd-expanded-arrow pd-expanded-next" onClick={() => setExpandedImg((expandedImg + 1) % imgs.length)}>&#8250;</button>
-              </>
-            )}
-          </div>
-          <div className="pd-expanded-thumbs">
-            {imgs.map((img, i) => (
-              <div key={i} className={`pd-expanded-thumb${i === expandedImg ? ' active' : ''}`} onClick={(e) => { e.stopPropagation(); setExpandedImg(i); }}>
-                <img src={img} alt={`View ${i + 1}`} />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Product info card */}
       <div className="ch-card product-detail">
@@ -179,6 +155,7 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
   const [inputValue, setInputValue] = useState('');
   const [busy, setBusy] = useState(false);
   const [showUploadZone, setShowUploadZone] = useState(false);
+  const [expanded, setExpanded] = useState(null); // { product, imgIdx }
   const stepRef = useRef(0);
   const msgsEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -369,7 +346,7 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
           </div>
         );
       case 'productDetail':
-        return <div key={idx} className="pd-detail-wrap"><ProductDetail product={msg.product} /></div>;
+        return <div key={idx} className="pd-detail-wrap"><ProductDetail product={msg.product} onExpandImage={(p, i) => setExpanded({ product: p, imgIdx: i })} /></div>;
       case 'orderSummary':
         return <div key={idx} className="ch-special"><OrderSummary /></div>;
       case 'homeAddress':
@@ -463,6 +440,36 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
 
           <div ref={msgsEndRef} />
         </div>
+
+        {/* Expanded image viewer — covers the entire chat popup */}
+        {expanded && (() => {
+          const imgs = expanded.product.images || [expanded.product.image];
+          const idx = expanded.imgIdx;
+          return (
+            <div className="pd-expanded">
+              <div className="pd-expanded-header">
+                <span>{expanded.product.name}</span>
+                <button className="pd-expanded-close" onClick={() => setExpanded(null)}>&#10005;</button>
+              </div>
+              <div className="pd-expanded-body">
+                <img src={imgs[idx]} alt={expanded.product.name} />
+                {imgs.length > 1 && (
+                  <>
+                    <button className="pd-expanded-arrow pd-expanded-prev" onClick={() => setExpanded(e => ({ ...e, imgIdx: (e.imgIdx - 1 + imgs.length) % imgs.length }))}>&#8249;</button>
+                    <button className="pd-expanded-arrow pd-expanded-next" onClick={() => setExpanded(e => ({ ...e, imgIdx: (e.imgIdx + 1) % imgs.length }))}>&#8250;</button>
+                  </>
+                )}
+              </div>
+              <div className="pd-expanded-thumbs">
+                {imgs.map((img, i) => (
+                  <div key={i} className={`pd-expanded-thumb${i === idx ? ' active' : ''}`} onClick={() => setExpanded(e => ({ ...e, imgIdx: i }))}>
+                    <img src={img} alt={`View ${i + 1}`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Footer — no chips, just input */}
         <div className="ch-foot">
