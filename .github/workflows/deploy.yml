@@ -24,7 +24,7 @@ jobs:
       - run: npm install
       - run: npm run build
         env:
-          VITE_DEEPSEEK_KEY: ${{ secrets.VITE_DEEPSEEK_KEY }}
+          VITE_GEMINI_KEY: ${{ secrets.VITE_GEMINI_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
