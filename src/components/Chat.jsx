@@ -179,6 +179,29 @@ export default function Chat({ open, onClose, onCartUpdate, onShowFinale }) {
 
   useEffect(() => { scrollBottom(); }, [messages, scrollBottom]);
 
+  // Handle mobile keyboard — resize chat to visual viewport
+  useEffect(() => {
+    if (!window.visualViewport) return;
+    const vv = window.visualViewport;
+    const popup = document.querySelector('.chat-popup');
+    const handleResize = () => {
+      if (popup && open) {
+        popup.style.height = `${vv.height}px`;
+        popup.style.top = `${vv.offsetTop}px`;
+      }
+    };
+    const handleClose = () => {
+      if (popup) { popup.style.height = ''; popup.style.top = ''; }
+    };
+    vv.addEventListener('resize', handleResize);
+    vv.addEventListener('scroll', handleResize);
+    return () => {
+      vv.removeEventListener('resize', handleResize);
+      vv.removeEventListener('scroll', handleResize);
+      handleClose();
+    };
+  }, [open]);
+
   // ── Play AI messages ──
   async function playAI(step) {
     setBusy(true);
