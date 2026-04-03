@@ -389,7 +389,7 @@
 .pd-scroll {
   display: flex; gap: 10px; overflow-x: scroll; overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  padding: 4px 24px 12px;
+  padding: 4px 24px 12px 40px;
   -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
 .pd-scroll::-webkit-scrollbar { display: none; }
