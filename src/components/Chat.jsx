@@ -104,60 +104,89 @@ function ConfirmationCard() {
   );
 }
 
-// Order history data
+// Order history data with timeline steps
 const orderHistory = {
   'ST-4821': {
     id: 'ST-4821', status: 'Delivered', statusColor: 'green',
-    date: 'March 28, 2026', address: 'Home — 456 Oak Ave',
-    items: [{ name: 'Reebok Classic Leather', size: '10', color: 'Black', price: 90, image: products[0].image }],
-    total: 93.43, tracking: null,
+    item: { name: 'Reebok Classic Leather', size: '10', color: 'Black', image: products[0].image },
+    arrival: 'Delivered Friday, March 28',
+    timeline: [
+      { label: 'Order Confirmed', detail: 'March 25', state: 'done' },
+      { label: 'Shipped via UPS', detail: 'March 26 · 1Z999AA10312345678', state: 'done' },
+      { label: 'Austin Distribution Center', detail: 'March 27', state: 'done' },
+      { label: 'Delivered', detail: 'March 28, 2:15 PM', state: 'done' },
+    ],
   },
   'ST-5102': {
     id: 'ST-5102', status: 'In Transit', statusColor: 'blue',
-    date: 'Expected April 5, 2026', address: 'Office — 200 Congress Ave',
-    items: [
-      { name: 'Essential Crew Tee', size: 'M', color: 'Black', price: 28, image: products[5].image },
-      { name: "Levi's 501 Jeans", size: '32x32', color: 'Dark Indigo', price: 70, image: products[8].image },
+    item: { name: 'Essential Crew Tee + Levi\'s 501', size: 'M / 32x32', color: 'Black / Indigo', image: products[5].image },
+    arrival: 'Arriving Saturday, April 5',
+    timeline: [
+      { label: 'Order Confirmed', detail: 'March 30', state: 'done' },
+      { label: 'Shipped via UPS', detail: 'March 31 · 1Z999AA10123456784', state: 'done' },
+      { label: 'Austin Sorting Facility', detail: 'In transit · Updated 3h ago', state: 'current' },
+      { label: 'Delivered', detail: 'Expected April 5', state: 'pending' },
     ],
-    total: 101.43, tracking: 'UPS 1Z999AA10123456784',
   },
   'ST-5387': {
     id: 'ST-5387', status: 'Processing', statusColor: 'orange',
-    date: 'Ordered April 2, 2026', address: 'Home — 456 Oak Ave',
-    items: [{ name: 'Performance Joggers', size: 'M', color: 'Black', price: 48, image: products[9].image }],
-    total: 51.43, tracking: null,
+    item: { name: 'Performance Joggers', size: 'M', color: 'Black', image: products[9].image },
+    arrival: 'Estimated Tuesday, April 8',
+    timeline: [
+      { label: 'Order Confirmed', detail: 'April 2', state: 'done' },
+      { label: 'Preparing for Shipment', detail: 'Processing', state: 'current' },
+      { label: 'Shipped', detail: 'Pending', state: 'pending' },
+      { label: 'Delivered', detail: 'Expected April 8', state: 'pending' },
+    ],
   },
 };
 
 function OrderStatusCard({ orderId }) {
   const order = orderHistory[orderId];
   if (!order) return null;
-  const statusStyles = { green: '#2d8a4e', blue: '#2563eb', orange: '#d97706' };
-  const statusBg = { green: 'rgba(45,138,78,.08)', blue: 'rgba(37,99,235,.08)', orange: 'rgba(217,119,6,.08)' };
+  const colors = { green: '#2d8a4e', blue: '#2563eb', orange: '#d97706' };
+  const bgColors = { green: 'rgba(45,138,78,.08)', blue: 'rgba(37,99,235,.08)', orange: 'rgba(217,119,6,.08)' };
+  const c = colors[order.statusColor];
+  const bg = bgColors[order.statusColor];
+
   return (
     <div className="ch-card order-status-card">
+      {/* Header */}
       <div className="os-header">
-        <span className="os-id">Order #{order.id}</span>
-        <span className="os-status" style={{ color: statusStyles[order.statusColor], background: statusBg[order.statusColor] }}>
-          {order.status}
-        </span>
+        <span className="os-id">#{order.id}</span>
+        <span className="os-status" style={{ color: c, background: bg }}>{order.status}</span>
       </div>
-      <div className="ch-card-divider" />
-      {order.items.map((item, i) => (
-        <div key={i} className="ch-card-item">
-          <div className="ch-card-item-img"><img src={item.image} alt={item.name} /></div>
-          <div className="ch-card-item-info">
-            <strong>{item.name}</strong>
-            <span>{item.color} &middot; Size {item.size}</span>
-          </div>
-          <span className="ch-card-item-price">${item.price}.00</span>
+
+      {/* Product */}
+      <div className="os-product">
+        <div className="os-product-img"><img src={order.item.image} alt={order.item.name} /></div>
+        <div className="os-product-info">
+          <strong>{order.item.name}</strong>
+          <span>Size {order.item.size} &middot; {order.item.color}</span>
         </div>
-      ))}
-      <div className="ch-card-divider" />
-      <div className="ch-card-row"><span>Total</span><span>${order.total.toFixed(2)}</span></div>
-      <div className="ch-card-row"><span>Date</span><span>{order.date}</span></div>
-      <div className="ch-card-row"><span>Ship to</span><span>{order.address}</span></div>
-      {order.tracking && <div className="ch-card-row"><span>Tracking</span><span style={{fontSize:'11px'}}>{order.tracking}</span></div>}
+      </div>
+
+      {/* Timeline */}
+      <div className="os-timeline">
+        {order.timeline.map((step, i) => (
+          <div key={i} className={`os-step os-step-${step.state}`}>
+            <div className="os-step-track">
+              <div className="os-step-dot" style={step.state === 'done' || step.state === 'current' ? { borderColor: c, background: step.state === 'done' ? c : '#fff' } : {}} />
+              {i < order.timeline.length - 1 && <div className="os-step-line" style={step.state === 'done' ? { background: c } : {}} />}
+            </div>
+            <div className="os-step-content">
+              <div className="os-step-label">{step.label}</div>
+              <div className="os-step-detail">{step.detail}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Arrival */}
+      <div className="os-arrival" style={{ background: bg, borderColor: c }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span style={{ color: c }}>{order.arrival}</span>
+      </div>
     </div>
   );
 }
